@@ -1,0 +1,13 @@
+fastapi[all]
+langchain-community
+langchain-core
+langchain
+langgraph
+uvicorn
+groq
+langchain-ollama
+langchain-groq
+langchain-text-splitters
+numpy
+ipykernel
+langchain-huggingface
