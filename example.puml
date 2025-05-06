@@ -1,58 +1,46 @@
 ```plantuml
 @startuml
-!define MICROservices "Microservices"
-!define DATABASE "Database"
-!define FRONTEND "Frontend"
-!define PAYMENTGATEWAY "Payment Gateway"
-!define CLOUDINFRASTRUCTURE "Cloud Infrastructure"
-!define CICDPIPELINE "CI/CD Pipeline"
+!define CLEAN_ARCHITECTURE "#FFFFFF"
+!define PRESENTATION_LAYER "#CCCCCC"
+!define APPLICATION_LAYER "#AAAAAA"
+!define DOMAIN_LAYER "#999999"
+!define DATA_ACCESS_LAYER "#888888"
+!define INFRASTRUCTURE_LAYER "#777777"
 
-class Microservices {
-  - User Service
-  - Vendor Service
-  - Product Service
-  - Order Service
-  - Payment Service
-  - Notification Service
-}
+class UserInterface as "User Interface" <<PRESENTATION_LAYER>>
+class MobileApp as "Mobile App" <<PRESENTATION_LAYER>>
+class WebApp as "Web App" <<PRESENTATION_LAYER>>
 
-class Database {
-  - Relational Database (MySQL)
-  - NoSQL Database (MongoDB)
-}
+class APIGateway as "API Gateway" <<APPLICATION_LAYER>>
+class UserManagementService as "User Management Service" <<APPLICATION_LAYER>>
+class StreamingService as "Streaming Service" <<APPLICATION_LAYER>>
+class NotificationService as "Notification Service" <<APPLICATION_LAYER>>
 
-class Frontend {
-  - React Native
-  - Firebase Cloud Messaging (FCM)
-  - OneSignal
-}
+class BusinessLogic as "Business Logic" <<DOMAIN_LAYER>>
+class DomainModels as "Domain Models" <<DOMAIN_LAYER>>
 
-class PaymentGateway {
-  - Stripe
-  - PayPal
-  - Razorpay
-}
+class DatabaseAccess as "Database Access" <<DATA_ACCESS_LAYER>>
+class Caching as "Caching" <<DATA_ACCESS_LAYER>>
 
-class CloudInfrastructure {
-  - AWS (EC2, S3, RDS, ECS)
-  - Prometheus
-  - Grafana
-  - ELK Stack
-}
+class CloudServices as "Cloud Services" <<INFRASTRUCTURE_LAYER>>
+class StreamingInfrastructure as "Streaming Infrastructure" <<INFRASTRUCTURE_LAYER>>
 
-class CICDPipeline {
-  - Jenkins
-  - Docker
-  - Kubernetes
-}
+UserInterface --* MobileApp
+UserInterface --* WebApp
 
-Microservices *-down-> Database : uses
-Frontend *-down-> Microservices : interacts with
-PaymentGateway *-down-> Microservices : integrates with
-Microservices *-down-> CloudInfrastructure : deployed on
-CICDPipeline *-down-> Microservices : automates deployment of
-CICDPipeline *-down-> CloudInfrastructure : automates deployment on
-Frontend *-down-> PaymentGateway : integrates with
-CloudInfrastructure *-down-> Database : provides
+APIGateway --* UserManagementService
+APIGateway --* StreamingService
+APIGateway --* NotificationService
+
+APIGateway --* UserInterface
+
+BusinessLogic --* DomainModels
+
+DatabaseAccess --* BusinessLogic
+Caching --* BusinessLogic
+
+CloudServices --* StreamingInfrastructure
+StreamingInfrastructure --* APIGateway
+
 @enduml
 ```
