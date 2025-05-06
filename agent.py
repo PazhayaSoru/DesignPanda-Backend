@@ -226,6 +226,7 @@ class SadAgent:
     )
   
   def uml_node(self,state : AgentState) -> Command[Literal["__end__"]]:
+     print("****************Entered uml node****************")
      uml_prompt = (
         """
         Analyze the given software architecture and provide an appropriate plantuml code 
