@@ -15,5 +15,3 @@ def critic_retrieval(question: str) -> str:
 def optimizer_retrieval(question : str) -> str:
   pass
 
-def clean_text(text):
-  clean_text = re.sub(r"<think>.*?</think>\s*","",text,flags=re.DOTALL)

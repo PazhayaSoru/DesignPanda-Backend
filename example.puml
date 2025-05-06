@@ -1,0 +1,58 @@
+```plantuml
+@startuml
+!define MICROservices "Microservices"
+!define DATABASE "Database"
+!define FRONTEND "Frontend"
+!define PAYMENTGATEWAY "Payment Gateway"
+!define CLOUDINFRASTRUCTURE "Cloud Infrastructure"
+!define CICDPIPELINE "CI/CD Pipeline"
+
+class Microservices {
+  - User Service
+  - Vendor Service
+  - Product Service
+  - Order Service
+  - Payment Service
+  - Notification Service
+}
+
+class Database {
+  - Relational Database (MySQL)
+  - NoSQL Database (MongoDB)
+}
+
+class Frontend {
+  - React Native
+  - Firebase Cloud Messaging (FCM)
+  - OneSignal
+}
+
+class PaymentGateway {
+  - Stripe
+  - PayPal
+  - Razorpay
+}
+
+class CloudInfrastructure {
+  - AWS (EC2, S3, RDS, ECS)
+  - Prometheus
+  - Grafana
+  - ELK Stack
+}
+
+class CICDPipeline {
+  - Jenkins
+  - Docker
+  - Kubernetes
+}
+
+Microservices *-down-> Database : uses
+Frontend *-down-> Microservices : interacts with
+PaymentGateway *-down-> Microservices : integrates with
+Microservices *-down-> CloudInfrastructure : deployed on
+CICDPipeline *-down-> Microservices : automates deployment of
+CICDPipeline *-down-> CloudInfrastructure : automates deployment on
+Frontend *-down-> PaymentGateway : integrates with
+CloudInfrastructure *-down-> Database : provides
+@enduml
+```

@@ -11,3 +11,6 @@ langchain-text-splitters
 numpy
 ipykernel
 langchain-huggingface
+huggingface_hub
+faiss-cpu
+rank-bm25
